@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net10.0-android</TargetFramework>
+    <AssemblyName>EdgeKit</AssemblyName>
+    <RootNamespace>EdgeKit</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseMaui>true</UseMaui>
+    <MauiXamlInflator>SourceGen</MauiXamlInflator>
+    <ApplicationId>com.companyname.edgekit</ApplicationId>
+    <ApplicationTitle>EdgeKit</ApplicationTitle>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <RuntimeIdentifiers>android-arm64</RuntimeIdentifiers>
+    <AndroidManifest>Platforms/Android/AndroidManifest.xml</AndroidManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <MauiXaml Include="App.xaml" />
+    <MauiXaml Include="AppShell.xaml" />
+    <MauiXaml Include="MainPage.xaml" />
+    <MauiXaml Include="Resources/Styles/Colors.xaml" />
+    <MauiXaml Include="Resources/Styles/Styles.xaml" />
+    <Compile Remove="Services.cs" />
+    <Compile Remove="Platforms/Android/EdgePanelService.cs" />
+    <Compile Remove="Platforms/Android/EdgePermissions.cs" />
+    <Compile Remove="Platforms/Android/EdgePanelController.cs" />
+    <PackageReference Include="ZXing.Net.Maui.Controls" Version="0.10.4" />
+    <Compile Remove="MainPage. QRCommunication.cs" />
+    <Compile Remove="MainPage.ScamSense. cs.cs" />
+    <Compile Remove="DocumentFileReader.cs" />
+    <Compile Remove="MainPage.DocumentIntelligence.cs" />
+    <Compile Remove="Services/DocumentFileReader.cs" />
+    <Compile Remove="Services/DocumentIntelligenceEngine.cs" />
+    <Compile Remove="Platforms/Android/SmartShareIntentInbox.cs" />
+    <Compile Remove="MainPage.SmartShare.cs" />
+    <Compile Remove="Services/SmartShareServer.cs" />
+    <MauiIcon Include="Resources/Apk/icon.jpg" />
+    <MauiSplashScreen Include="Resources/Apk/splash.jpg" Color="#0D337F" />
+  </ItemGroup>
+  <ItemGroup>
+    <MauiImage Include="Resources\Images\*" />
+    <MauiFont Include="Resources\Fonts\*" />
+    <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.90" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.13" />
+    <PackageReference Include="ZXing.Net" Version="0.16.11" />
+  </ItemGroup>
+</Project>
