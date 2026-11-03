@@ -1,96 +1,78 @@
-EdgeKit
+<div align="center">
 
-<p align="center">
-  <strong>YOUR PHONE. YOUR TOOLKIT.</strong>
-  <br />
-  A smarter utility space for everyday tasks.
-</p><p align="center">
-  <a href="https://drive.google.com/uc?export=download&id=1hIHqZlEidNSbzFg0KExIbhmfPQOvFMAM">
-    <img src="https://img.shields.io/badge/↓%20DOWNLOAD%20EDGEKIT-2563EB?style=for-the-badge&labelColor=111827" alt="Download EdgeKit APK" />
-  </a>
-  <br />
-  <sub>Android app · APK download · Free to download</sub>
-</p>---
+# EdgeKit
 
-Welcome to your personal app store
+### Your everyday tools. One thoughtful toolkit.
 
-EdgeKit brings a collection of practical tools into one focused Android experience. Instead of filling your phone with separate utility apps, get a growing toolkit designed to make everyday digital tasks quicker, easier and more convenient.
+A personal collection of practical Android utilities for text, files, security checks, QR codes, networking and more—kept together in one clean workspace.
 
-From generating secure passwords to inspecting files and analyzing suspicious messages, EdgeKit keeps useful tools within reach.
+[![Download EdgeKit](https://img.shields.io/badge/DOWNLOAD-EDGEKIT%20FOR%20ANDROID-3159B7?style=for-the-badge&labelColor=191B24)](https://drive.google.com/uc?export=download&id=1hIHqZlEidNSbzFg0KExIbhmfPQOvFMAM)
 
-<p align="center">
-  <strong>ONE APP. A WHOLE TOOLKIT.</strong>
-</p>---
+**Android · APK download · Free**
 
-Explore the collection
-
-Collection| What's inside
-Smart Tools| NEXUS text analysis, Text Lab and Text Compare
-Security & Privacy| ScamSense message analysis and Password Studio
-QR & Barcodes| Generate QR codes, Code 128 and EAN-13 barcodes
-Connectivity| Network diagnostics, DNS lookup and TCP port testing
-Developer Utilities| JSON formatting, encoding tools and UUID generation
-File Utilities| File metadata inspection and SHA-256 hashing
-Personal Utilities| Quick notes, saved text, clipboard tools and unit conversion
-Form Assistance| Save reusable form details locally and retrieve them when needed
-
-Features are designed to work locally where applicable. Network diagnostic tools naturally require connectivity for external lookups.
+</div>
 
 ---
 
-Why EdgeKit?
+## Welcome to your personal app store
 
-- A unified workspace: Keep useful tools together in one app.
-- Offline-friendly: Many utilities can be used without an internet connection.
-- Privacy-conscious design: Local processing for supported tools, without requiring an AI service for their core functionality.
-- Made for Android: A mobile-first interface with a dedicated tools collection.
-- Built with C# and .NET MAUI: A native Android-focused application built around practical everyday utilities.
+EdgeKit brings a set of useful tools into one place, so you can get things done without juggling a folder full of single-purpose apps. Pick a tool, use it when you need it, and keep your favourite shortcuts, notes and saved text close at hand.
+
+> **One app. A whole toolkit.**
+
+## Explore the collection
+
+| Collection | Discover |
+| --- | --- |
+| **Text & writing** | Text Lab for transforming and analysing text, plus Text Compare for spotting changes. |
+| **Privacy & security** | Password Studio for password generation and strength checks; ScamSense for reviewing suspicious messages, payment requests and links. |
+| **QR & barcodes** | Create QR codes and product barcodes, or prepare QR codes for email, SMS, WhatsApp and contacts. |
+| **Files & device** | Inspect file details and SHA-256 hashes, or check device specifications and display information. |
+| **Network & developer** | Network diagnostics, DNS and TCP checks, JSON formatting, encoding tools and UUID generation. |
+| **Everyday helpers** | Calculator, unit converter, clipboard, quick notes, reusable saved text and form assistance. |
+| **Your workspace** | Arrange quick-access shortcuts, keep saved items on your device, and switch between light and dark themes. |
+
+## Get EdgeKit
+
+<div align="center">
+
+[![Get the Android APK](https://img.shields.io/badge/GET%20THE%20APP-Download%20APK-3159B7?style=for-the-badge&labelColor=191B24)](https://drive.google.com/uc?export=download&id=1hIHqZlEidNSbzFg0KExIbhmfPQOvFMAM)
+
+[Open the file on Google Drive](https://drive.google.com/file/d/1hIHqZlEidNSbzFg0KExIbhmfPQOvFMAM/view?usp=drivesdk)
+
+</div>
+
+### Install on Android
+
+1. Tap **Download EdgeKit** to get the APK from Google Drive.
+2. Open the downloaded APK on your Android device.
+3. If Android asks, allow your browser or file manager to install apps from that source.
+4. Review the installation prompt, then open EdgeKit.
+
+Android may show a security warning for apps installed outside Google Play. Only install APKs from a source you trust. If the download button does not start the download, use the Google Drive link above.
+
+## Made for a more personal workflow
+
+- **A focused home screen** for shortcuts you choose.
+- **Profiles** to organise tools for different activities.
+- **Saved notes and text** stored locally on your device.
+- **Light and dark themes** to suit your preference.
+- **Offline-friendly utilities** where the task does not need a network connection. Network tools and external lookups naturally need connectivity.
+
+## App details
+
+| | |
+| --- | --- |
+| **Platform** | Android |
+| **Download** | APK hosted on Google Drive |
+| **Built with** | C# and .NET MAUI |
+| **Price** | Free |
 
 ---
 
-Get EdgeKit
+<div align="center">
 
-<p align="center">
-  <a href="https://drive.google.com/uc?export=download&id=1hIHqZlEidNSbzFg0KExIbhmfPQOvFMAM">
-    <img src="https://img.shields.io/badge/GET%20THE%20APP-DOWNLOAD%20APK-2563EB?style=for-the-badge&labelColor=111827" alt="Get EdgeKit APK" />
-  </a>
-</p>Installation
+**EDGEKIT**  
+Your personal toolkit, ready when you are.
 
-1. Tap Download EdgeKit above.
-2. Download the APK from Google Drive.
-3. Open the downloaded APK on your Android phone.
-4. If prompted, allow your browser or file manager to install apps from that source.
-5. Follow the Android installation prompts and launch EdgeKit.
-
-Android may display a security warning when installing an app outside Google Play. Only install APKs from a source you trust.
-
-Having trouble downloading?
-
-"Open the EdgeKit file on Google Drive" (https://drive.google.com/file/d/1hIHqZlEidNSbzFg0KExIbhmfPQOvFMAM/view?usp=drivesdk)
-
----
-
-App information
-
-Detail| Information
-App name| EdgeKit
-Platform| Android
-Framework| .NET MAUI
-Primary language| C#
-Distribution| Google Drive APK
-Internet requirement| Optional for many tools; required for network-dependent functions
-Price| Free download
-
----
-
-A toolkit that grows with you
-
-EdgeKit is built around a simple idea: useful software should be easy to access, practical to use and thoughtfully designed.
-
-Explore the tools, discover your favourites and keep your everyday digital workflow in one place.
-
-<p align="center">
-  <strong>EDGEKIT</strong>
-  <br />
-  <sub>Your everyday tools, one tap away.</sub>
-</p>
+</div>
