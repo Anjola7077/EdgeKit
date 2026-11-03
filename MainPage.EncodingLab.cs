@@ -1,4 +1,3 @@
-
 using System.Net;
 using System.Text;
 using System.Text.Json;
@@ -8,10 +7,6 @@ namespace EdgeKit;
 
 public partial class MainPage
 {
-    // ---------------------------------------------------------
-    // ENCODING LAB
-    // ---------------------------------------------------------
-
     private async Task OpenEncodingLabAsync()
     {
         string? input = await PromptAsync(
@@ -134,10 +129,6 @@ public partial class MainPage
         }
     }
 
-    // ---------------------------------------------------------
-    // UNICODE
-    // ---------------------------------------------------------
-
     private string EncodeUnicode(string input)
     {
         var result = new StringBuilder();
@@ -167,10 +158,6 @@ public partial class MainPage
             });
     }
 
-    // ---------------------------------------------------------
-    // JSON
-    // ---------------------------------------------------------
-
     private string ProcessJson(
         string input,
         bool indented)
@@ -184,10 +171,6 @@ public partial class MainPage
                 WriteIndented = indented
             });
     }
-
-    // ---------------------------------------------------------
-    // JWT PAYLOAD DECODER
-    // ---------------------------------------------------------
 
     private string DecodeJwtPayload(string token)
     {
@@ -220,10 +203,6 @@ public partial class MainPage
                 WriteIndented = true
             });
     }
-
-    // ---------------------------------------------------------
-    // RESULT DISPLAY
-    // ---------------------------------------------------------
 
     private async Task ShowEncodingResultAsync(
         string operation,

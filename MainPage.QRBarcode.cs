@@ -1,4 +1,3 @@
-
 using System;
 using System.IO;
 using System.Linq;
@@ -123,7 +122,6 @@ public partial class MainPage
                 FileSystem.CacheDirectory,
                 fileName);
 
-            // Generate PNG using ZXing.Net and Android Bitmap.
             BarcodeImageGenerator.WritePng(
                 value,
                 filePath,

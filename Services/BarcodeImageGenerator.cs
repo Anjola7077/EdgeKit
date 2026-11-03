@@ -1,4 +1,3 @@
-
 using System;
 using System.IO;
 using ZXing;
@@ -37,8 +36,6 @@ internal static class BarcodeImageGenerator
         int pixelCount = pixels.Width * pixels.Height;
         int[] colors = new int[pixelCount];
 
-        // ZXing returns pixels in BGRA byte order.
-        // Android Bitmap.CreateBitmap expects ARGB integer pixels.
         for (int i = 0; i < pixelCount; i++)
         {
             int offset = i * 4;

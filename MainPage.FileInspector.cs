@@ -1,4 +1,3 @@
-
 using System.Security.Cryptography;
 
 namespace EdgeKit;
@@ -159,35 +158,35 @@ public partial class MainPage
     }
 
     private View BuildFileInfoRow(string title, string value)
-{
-    var grid = new Grid
     {
-        ColumnDefinitions =
+        var grid = new Grid
         {
-            new ColumnDefinition(GridLength.Star),
-            new ColumnDefinition(GridLength.Star)
-        }
-    };
+            ColumnDefinitions =
+            {
+                new ColumnDefinition(GridLength.Star),
+                new ColumnDefinition(GridLength.Star)
+            }
+        };
 
-    var titleLabel = Txt(title, 12, false, Muted);
+        var titleLabel = Txt(title, 12, false, Muted);
 
-    var valueLabel = new Label
-    {
-        Text = value,
-        FontSize = 12,
-        TextColor = Ink,
-        HorizontalTextAlignment = TextAlignment.End,
-        HorizontalOptions = LayoutOptions.Fill,
-        LineBreakMode = LineBreakMode.WordWrap
-    };
+        var valueLabel = new Label
+        {
+            Text = value,
+            FontSize = 12,
+            TextColor = Ink,
+            HorizontalTextAlignment = TextAlignment.End,
+            HorizontalOptions = LayoutOptions.Fill,
+            LineBreakMode = LineBreakMode.WordWrap
+        };
 
-    Grid.SetColumn(valueLabel, 1);
+        Grid.SetColumn(valueLabel, 1);
 
-    grid.Children.Add(titleLabel);
-    grid.Children.Add(valueLabel);
+        grid.Children.Add(titleLabel);
+        grid.Children.Add(valueLabel);
 
-    return grid;
-}
+        return grid;
+    }
 
     private async Task VerifyFileHashAsync(string actualHash)
     {

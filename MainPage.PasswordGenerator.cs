@@ -189,14 +189,12 @@ public partial class MainPage
 
             var password = new List<char>();
 
-            // Guarantee at least one character from each selected group.
             foreach (string group in requiredGroups)
             {
                 password.Add(
                     group[RandomNumberGenerator.GetInt32(group.Length)]);
             }
 
-            // Fill the remaining positions from the combined character set.
             while (password.Count < passwordLength)
             {
                 password.Add(
@@ -204,7 +202,6 @@ public partial class MainPage
                         RandomNumberGenerator.GetInt32(characterSet.Length)]);
             }
 
-            // Cryptographically random Fisher-Yates shuffle.
             for (int i = password.Count - 1; i > 0; i--)
             {
                 int j = RandomNumberGenerator.GetInt32(i + 1);
@@ -241,10 +238,10 @@ public partial class MainPage
                 lengthSlider,
 
                 new BoxView
-{
-    HeightRequest = 1,
-    BackgroundColor = SurfaceAlt
-},
+                {
+                    HeightRequest = 1,
+                    BackgroundColor = SurfaceAlt
+                },
 
                 Txt("CHARACTER TYPES", 11, true, Accent),
 
@@ -289,10 +286,10 @@ public partial class MainPage
                 },
 
                 new BoxView
-{
-    HeightRequest = 1,
-    BackgroundColor = SurfaceAlt
-},
+                {
+                    HeightRequest = 1,
+                    BackgroundColor = SurfaceAlt
+                },
 
                 new HorizontalStackLayout
                 {
@@ -334,10 +331,10 @@ public partial class MainPage
                 },
 
                 new BoxView
-{
-    HeightRequest = 1,
-    BackgroundColor = SurfaceAlt
-},
+                {
+                    HeightRequest = 1,
+                    BackgroundColor = SurfaceAlt
+                },
 
                 strengthLabel,
                 strengthDetail

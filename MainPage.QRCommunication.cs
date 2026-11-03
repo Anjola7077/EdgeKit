@@ -1,8 +1,11 @@
-
 using System;
 using System.IO;
 using System.Linq;
+using System.Collections.Generic;
 using ZXing;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Storage;
 
 namespace EdgeKit;
 
@@ -65,8 +68,6 @@ public partial class MainPage
         }
     }
 
-    // EMAIL QR
-
     private async Task CreateEmailQRAsync()
     {
         string? email = await PromptAsync(
@@ -116,8 +117,6 @@ public partial class MainPage
             payload);
     }
 
-    // SMS QR
-
     private async Task CreateSMSQRAsync()
     {
         string? phone = await PromptAsync(
@@ -157,8 +156,6 @@ public partial class MainPage
             "Opens the messaging app with a prefilled message.",
             payload);
     }
-
-    // WHATSAPP QR
 
     private async Task CreateWhatsAppQRAsync()
     {
@@ -200,8 +197,6 @@ public partial class MainPage
             "Opens a WhatsApp conversation.",
             payload);
     }
-
-    // CONTACT CARD / VCARD
 
     private async Task CreateContactQRAsync()
     {
@@ -333,8 +328,6 @@ public partial class MainPage
             .Replace("\n", "\\n")
             .Replace("\r", "\\n");
     }
-
-    // SHARED QR GENERATOR
 
     private async Task GenerateCommunicationQRAsync(
         string title,

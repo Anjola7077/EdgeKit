@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -25,7 +24,6 @@ public static class FormVault
         }
         catch
         {
-            // Do not overwrite data automatically if decryption fails.
             throw new InvalidOperationException(
                 "The secure profile vault could not be opened. " +
                 "Your stored information has not been intentionally deleted. " +
