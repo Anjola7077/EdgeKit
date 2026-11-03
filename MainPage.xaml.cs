@@ -1,4 +1,3 @@
-
 using System.Text.Json;
 using EdgeKit.Models;
 using EdgeKit.Services;
@@ -52,7 +51,7 @@ public partial class MainPage : ContentPage
         : Color.FromArgb("#626575");
 
     private bool IsDark
-{
+    {
     get
     {
         var app = Application.Current;
@@ -147,10 +146,6 @@ public partial class MainPage : ContentPage
             await MessageAsync("Storage problem", ex.Message);
         }
     }
-
-    // ---------------------------------------------------------
-    // DESIGN SYSTEM
-    // ---------------------------------------------------------
 
     private Label Txt(
         string value,
@@ -283,10 +278,6 @@ public partial class MainPage : ContentPage
         };
     }
 
-    // ---------------------------------------------------------
-    // ANIMATED NAVIGATION
-    // ---------------------------------------------------------
-
     private void BuildNavigation()
     {
         _nav.Children.Clear();
@@ -354,7 +345,7 @@ public partial class MainPage : ContentPage
     }
 
     private async void ShowTab(string tab)
-{
+ {
     if (_busy)
         return;
 
@@ -426,217 +417,207 @@ public partial class MainPage : ContentPage
         return grid;
     }
 
-    // ---------------------------------------------------------
-    // HOME
-    // ---------------------------------------------------------
-
-    
-private View BuildHome()
-{
-    var page = Page();
-
-    // HEADER
-    var header = new Grid
+    private View BuildHome()
     {
-        ColumnDefinitions =
-        {
-            new ColumnDefinition(GridLength.Star),
-            new ColumnDefinition(GridLength.Auto)
-        }
-    };
+        var page = Page();
 
-    header.Add(new VerticalStackLayout
-    {
-        Spacing = 4,
-        Children =
+        var header = new Grid
         {
-            Txt("YOUR PERSONAL EDGE", 11, true, Accent),
-            Txt("EdgeKit", 34, true)
-        }
-    }, 0, 0);
+            ColumnDefinitions =
+            {
+                new ColumnDefinition(GridLength.Star),
+                new ColumnDefinition(GridLength.Auto)
+            }
+        };
 
-    var themeButton = new Border
-    {
-        WidthRequest = 54,
-        HeightRequest = 54,
-        BackgroundColor = Surface,
-        StrokeThickness = 1,
-        Stroke = new SolidColorBrush(
-            IsDark
-                ? Color.FromArgb("#343844")
-                : Color.FromArgb("#E1E4EF")),
-        StrokeShape = new RoundRectangle
+        header.Add(new VerticalStackLayout
         {
-            CornerRadius = new CornerRadius(19)
-        },
-        Content = new Grid
-        {
+            Spacing = 4,
             Children =
             {
-                new Label
+                Txt("YOUR PERSONAL EDGE", 11, true, Accent),
+                Txt("EdgeKit", 34, true)
+            }
+        }, 0, 0);
+
+        var themeButton = new Border
+        {
+            WidthRequest = 54,
+            HeightRequest = 54,
+            BackgroundColor = Surface,
+            StrokeThickness = 1,
+            Stroke = new SolidColorBrush(
+                IsDark
+                    ? Color.FromArgb("#343844")
+                    : Color.FromArgb("#E1E4EF")),
+            StrokeShape = new RoundRectangle
+            {
+                CornerRadius = new CornerRadius(19)
+            },
+            Content = new Grid
+            {
+                Children =
                 {
-                    Text = IsDark ? "☼" : "☾",
-                    FontSize = 27,
-                    FontFamily = "OpenSansSemibold",
-                    TextColor = Accent,
-                    HorizontalTextAlignment = TextAlignment.Center,
-                    VerticalTextAlignment = TextAlignment.Center,
-                    HorizontalOptions = LayoutOptions.Center,
-                    VerticalOptions = LayoutOptions.Center
+                    new Label
+                    {
+                        Text = IsDark ? "☼" : "☾",
+                        FontSize = 27,
+                        FontFamily = "OpenSansSemibold",
+                        TextColor = Accent,
+                        HorizontalTextAlignment = TextAlignment.Center,
+                        VerticalTextAlignment = TextAlignment.Center,
+                        HorizontalOptions = LayoutOptions.Center,
+                        VerticalOptions = LayoutOptions.Center
+                    }
                 }
             }
-        }
-    };
+        };
 
-    var themeTap = new TapGestureRecognizer();
-    themeTap.Tapped += async (_, _) =>
-    {
-        await themeButton.RotateTo(25, 90);
-        ToggleTheme();
-        await themeButton.RotateTo(0, 90);
-    };
-
-    themeButton.GestureRecognizers.Add(themeTap);
-
-    header.Add(themeButton, 1, 0);
-    page.Children.Add(header);
-
-    page.Children.Add(Txt(
-        "Your favourite actions, ready when you are.",
-        15,
-        color: Muted));
-
-    // ACTIVE PROFILE
-    var profile = _profiles.FirstOrDefault(
-        p => p.Id == _activeProfile);
-
-    var profileContent = new Grid
-    {
-        ColumnDefinitions =
+        var themeTap = new TapGestureRecognizer();
+        themeTap.Tapped += async (_, _) =>
         {
-            new ColumnDefinition(GridLength.Auto),
-            new ColumnDefinition(GridLength.Star),
-            new ColumnDefinition(GridLength.Auto)
-        },
-        ColumnSpacing = 13
-    };
+            await themeButton.RotateTo(25, 90);
+            ToggleTheme();
+            await themeButton.RotateTo(0, 90);
+        };
 
-    profileContent.Add(IconBox("◈", 54, true), 0, 0);
+        themeButton.GestureRecognizers.Add(themeTap);
 
-    profileContent.Add(new VerticalStackLayout
-    {
-        Spacing = 4,
-        VerticalOptions = LayoutOptions.Center,
-        Children =
+        header.Add(themeButton, 1, 0);
+        page.Children.Add(header);
+
+        page.Children.Add(Txt(
+            "Your favourite actions, ready when you are.",
+            15,
+            color: Muted));
+
+        var profile = _profiles.FirstOrDefault(
+            p => p.Id == _activeProfile);
+
+        var profileContent = new Grid
         {
-            Txt("CURRENT PROFILE", 10, true, Muted),
-            Txt(profile?.Name ?? "Everyday", 19, true),
-            Txt(
-                profile?.Description ?? "Your daily shortcuts",
-                12,
-                color: Muted)
+            ColumnDefinitions =
+            {
+                new ColumnDefinition(GridLength.Auto),
+                new ColumnDefinition(GridLength.Star),
+                new ColumnDefinition(GridLength.Auto)
+            },
+            ColumnSpacing = 13
+        };
+
+        profileContent.Add(IconBox("◈", 54, true), 0, 0);
+
+        profileContent.Add(new VerticalStackLayout
+        {
+            Spacing = 4,
+            VerticalOptions = LayoutOptions.Center,
+            Children =
+            {
+                Txt("CURRENT PROFILE", 10, true, Muted),
+                Txt(profile?.Name ?? "Everyday", 19, true),
+                Txt(
+                    profile?.Description ?? "Your daily shortcuts",
+                    12,
+                    color: Muted)
+            }
+        }, 1, 0);
+
+        profileContent.Add(
+            Btn("Change", () => ShowTab("Settings")), 2, 0);
+
+        page.Children.Add(Card(profileContent));
+
+        page.Children.Add(SectionHeader(
+            "Quick access",
+            "+ Add",
+            async () => await AddActionAsync()));
+
+        var actions = _actions
+            .Where(a => a.ProfileId == _activeProfile)
+            .OrderByDescending(a => a.IsPinned)
+            .ThenByDescending(a => a.CreatedAt)
+            .ToList();
+
+        if (actions.Count == 0)
+        {
+            page.Children.Add(Card(new VerticalStackLayout
+            {
+                Spacing = 12,
+                Children =
+                {
+                    IconBox("＋", 60, true),
+                    Txt("Build your own toolkit", 20, true),
+                    Txt(
+                        "Add calculators, saved text, notes and developer utilities to this profile.",
+                        14,
+                        color: Muted),
+                    Btn(
+                        "Create first shortcut",
+                        async () => await AddActionAsync(),
+                        true)
+                }
+            }));
         }
-    }, 1, 0);
+        else
+        {
+            var grid = TwoColumns();
 
-    profileContent.Add(
-        Btn("Change", () => ShowTab("Settings")), 2, 0);
+            for (int i = 0; i < actions.Count; i++)
+            {
+                var action = actions[i];
+                var tile = BuildActionTile(action);
 
-    page.Children.Add(Card(profileContent));
+                Grid.SetRow(tile, i / 2);
+                Grid.SetColumn(tile, i % 2);
 
-    // QUICK ACCESS
-    page.Children.Add(SectionHeader(
-        "Quick access",
-        "+ Add",
-        async () => await AddActionAsync()));
+                grid.Add(tile);
+            }
 
-    var actions = _actions
-        .Where(a => a.ProfileId == _activeProfile)
-        .OrderByDescending(a => a.IsPinned)
-        .ThenByDescending(a => a.CreatedAt)
-        .ToList();
+            page.Children.Add(grid);
+        }
 
-    if (actions.Count == 0)
-    {
         page.Children.Add(Card(new VerticalStackLayout
         {
             Spacing = 12,
             Children =
             {
-                IconBox("＋", 60, true),
-                Txt("Build your own toolkit", 20, true),
+                Txt("YOUR TOOLKIT", 11, true, Accent),
+                Txt("Everything useful, in one place.", 19, true),
                 Txt(
-                    "Add calculators, saved text, notes and developer utilities to this profile.",
-                    14,
+                    "Explore practical utilities for calculations, text, files and everyday tasks.",
+                    13,
                     color: Muted),
                 Btn(
-                    "Create first shortcut",
-                    async () => await AddActionAsync(),
+                    "Explore tools",
+                    () => ShowTab("Tools"),
                     true)
             }
         }));
-    }
-    else
-    {
-        var grid = TwoColumns();
 
-        for (int i = 0; i < actions.Count; i++)
+        page.Children.Add(Card(new HorizontalStackLayout
         {
-            var action = actions[i];
-            var tile = BuildActionTile(action);
-
-            Grid.SetRow(tile, i / 2);
-            Grid.SetColumn(tile, i % 2);
-
-            grid.Add(tile);
-        }
-
-        page.Children.Add(grid);
-    }
-
-    // TOOLKIT CARD
-    page.Children.Add(Card(new VerticalStackLayout
-    {
-        Spacing = 12,
-        Children =
-        {
-            Txt("YOUR TOOLKIT", 11, true, Accent),
-            Txt("Everything useful, in one place.", 19, true),
-            Txt(
-                "Explore practical utilities for calculations, text, files and everyday tasks.",
-                13,
-                color: Muted),
-            Btn(
-                "Explore tools",
-                () => ShowTab("Tools"),
-                true)
-        }
-    }));
-
-    // PRIVACY CARD
-    page.Children.Add(Card(new HorizontalStackLayout
-    {
-        Spacing = 12,
-        Children =
-        {
-            IconBox("▣", 42),
-            new VerticalStackLayout
+            Spacing = 12,
+            Children =
             {
-                Spacing = 3,
-                VerticalOptions = LayoutOptions.Center,
-                Children =
+                IconBox("▣", 42),
+                new VerticalStackLayout
                 {
-                    Txt("Private by design", 14, true),
-                    Txt(
-                        "Your saved items stay on this device.",
-                        12,
-                        color: Muted)
+                    Spacing = 3,
+                    VerticalOptions = LayoutOptions.Center,
+                    Children =
+                    {
+                        Txt("Private by design", 14, true),
+                        Txt(
+                            "Your saved items stay on this device.",
+                            12,
+                            color: Muted)
+                    }
                 }
             }
-        }
-    }, 14));
+        }, 14));
 
-    return Scroll(page);
-}
+        return Scroll(page);
+    }
 
     private View BuildActionTile(QuickAction action)
     {
@@ -675,10 +656,6 @@ private View BuildHome()
 
         return tile;
     }
-
-    // ---------------------------------------------------------
-    // TOOLS
-    // ---------------------------------------------------------
 
     private View BuildTools()
     {
@@ -774,8 +751,8 @@ private View BuildHome()
         page.Children.Add(ToolRow(
             "#", "UUID generator", "Generate and copy unique identifiers.",
             async () => await GenerateUuidAsync()));
- 
-page.Children.Add(ToolRow(
+  
+ page.Children.Add(ToolRow(
     "⇄", "Unit Converter",
     "Convert length, mass, temperature, storage and more.",
     async () => await OpenUnitConverterAsync()));
@@ -856,255 +833,247 @@ page.Children.Add(ToolRow(
         return card;
     }
 
-    // ---------------------------------------------------------
-// TEXT LAB
-// ---------------------------------------------------------
-
-private async Task OpenTextLabAsync()
-{
-    string? input = await PromptAsync(
-        "Text Lab",
-        "Enter or paste the text you want to process.",
-        "Your text goes here...",
-        multiline: true);
-
-    if (string.IsNullOrEmpty(input))
-        return;
-
-    while (true)
+    private async Task OpenTextLabAsync()
     {
-        string? operation = await ChooseAsync(
+        string? input = await PromptAsync(
             "Text Lab",
-            "Choose an operation.",
-            new[]
-            {
-                "Text statistics",
-                "UPPERCASE",
-                "lowercase",
-                "Title Case",
-                "Sentence case",
-                "Reverse text",
-                "Clean whitespace",
-                "Remove duplicate lines",
-                "Sort lines A-Z",
-                "Find and replace",
-                "Extract emails",
-                "Extract URLs",
-                "Extract phone numbers"
-            });
+            "Enter or paste the text you want to process.",
+            "Your text goes here...",
+            multiline: true);
 
-        if (operation == null)
+        if (string.IsNullOrEmpty(input))
             return;
 
-        string result = input;
-
-        switch (operation)
+        while (true)
         {
-            case "Text statistics":
-                await ShowTextStatisticsAsync(input);
-                continue;
+            string? operation = await ChooseAsync(
+                "Text Lab",
+                "Choose an operation.",
+                new[]
+                {
+                    "Text statistics",
+                    "UPPERCASE",
+                    "lowercase",
+                    "Title Case",
+                    "Sentence case",
+                    "Reverse text",
+                    "Clean whitespace",
+                    "Remove duplicate lines",
+                    "Sort lines A-Z",
+                    "Find and replace",
+                    "Extract emails",
+                    "Extract URLs",
+                    "Extract phone numbers"
+                });
 
-            case "UPPERCASE":
-                result = input.ToUpperInvariant();
-                break;
+            if (operation == null)
+                return;
 
-            case "lowercase":
-                result = input.ToLowerInvariant();
-                break;
+            string result = input;
 
-            case "Title Case":
-                result = System.Globalization.CultureInfo
-                    .CurrentCulture.TextInfo.ToTitleCase(
-                        input.ToLowerInvariant());
-                break;
-
-            case "Sentence case":
-                result = ToSentenceCase(input);
-                break;
-
-            case "Reverse text":
-                result = new string(input.Reverse().ToArray());
-                break;
-
-            case "Clean whitespace":
-                result = string.Join(
-                    Environment.NewLine,
-                    input.Split('\n')
-                        .Select(line => Regex.Replace(
-                            line.Trim(), @"[ \t]+", " "))
-                        .Where(line => !string.IsNullOrWhiteSpace(line)));
-                break;
-
-            case "Remove duplicate lines":
-                result = string.Join(
-                    Environment.NewLine,
-                    input.Replace("\r\n", "\n")
-                        .Split('\n')
-                        .Distinct(StringComparer.OrdinalIgnoreCase));
-                break;
-
-            case "Sort lines A-Z":
-                result = string.Join(
-                    Environment.NewLine,
-                    input.Replace("\r\n", "\n")
-                        .Split('\n')
-                        .OrderBy(line => line,
-                            StringComparer.OrdinalIgnoreCase));
-                break;
-
-            case "Find and replace":
+            switch (operation)
             {
-                string? search = await PromptAsync(
-                    "Find text",
-                    "What text should be replaced?",
-                    "Search text");
-
-                if (string.IsNullOrEmpty(search))
+                case "Text statistics":
+                    await ShowTextStatisticsAsync(input);
                     continue;
 
-                string? replacement = await PromptAsync(
-                    "Replace with",
-                    "Enter the replacement text.",
-                    "Replacement");
+                case "UPPERCASE":
+                    result = input.ToUpperInvariant();
+                    break;
 
-                if (replacement == null)
-                    continue;
+                case "lowercase":
+                    result = input.ToLowerInvariant();
+                    break;
 
-                result = input.Replace(
-                    search,
-                    replacement,
-                    StringComparison.OrdinalIgnoreCase);
-                break;
+                case "Title Case":
+                    result = System.Globalization.CultureInfo
+                        .CurrentCulture.TextInfo.ToTitleCase(
+                            input.ToLowerInvariant());
+                    break;
+
+                case "Sentence case":
+                    result = ToSentenceCase(input);
+                    break;
+
+                case "Reverse text":
+                    result = new string(input.Reverse().ToArray());
+                    break;
+
+                case "Clean whitespace":
+                    result = string.Join(
+                        Environment.NewLine,
+                        input.Split('\n')
+                            .Select(line => Regex.Replace(
+                                line.Trim(), @"[ \t]+", " "))
+                            .Where(line => !string.IsNullOrWhiteSpace(line)));
+                    break;
+
+                case "Remove duplicate lines":
+                    result = string.Join(
+                        Environment.NewLine,
+                        input.Replace("\r\n", "\n")
+                            .Split('\n')
+                            .Distinct(StringComparer.OrdinalIgnoreCase));
+                    break;
+
+                case "Sort lines A-Z":
+                    result = string.Join(
+                        Environment.NewLine,
+                        input.Replace("\r\n", "\n")
+                            .Split('\n')
+                            .OrderBy(line => line,
+                                StringComparer.OrdinalIgnoreCase));
+                    break;
+
+                case "Find and replace":
+                {
+                    string? search = await PromptAsync(
+                        "Find text",
+                        "What text should be replaced?",
+                        "Search text");
+
+                    if (string.IsNullOrEmpty(search))
+                        continue;
+
+                    string? replacement = await PromptAsync(
+                        "Replace with",
+                        "Enter the replacement text.",
+                        "Replacement");
+
+                    if (replacement == null)
+                        continue;
+
+                    result = input.Replace(
+                        search,
+                        replacement,
+                        StringComparison.OrdinalIgnoreCase);
+                    break;
+                }
+
+                case "Extract emails":
+                    result = ExtractMatches(
+                        input,
+                        @"[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}",
+                        true);
+                    break;
+
+                case "Extract URLs":
+                    result = ExtractMatches(
+                        input,
+                        @"https?://[^\s<>""']+",
+                        true);
+                    break;
+
+                case "Extract phone numbers":
+                    result = ExtractMatches(
+                        input,
+                        @"(?<!\w)(?:\+?\d[\d\s().-]{6,}\d)(?!\w)",
+                        false);
+                    break;
             }
 
-            case "Extract emails":
-                result = ExtractMatches(
-                    input,
-                    @"[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}",
-                    true);
-                break;
+            await ShowTextResultAsync(operation, result);
 
-            case "Extract URLs":
-                result = ExtractMatches(
-                    input,
-                    @"https?://[^\s<>""']+",
-                    true);
-                break;
+            bool useResult = await ConfirmAsync(
+                "Use processed text?",
+                "Would you like to apply this result to your working text?");
 
-            case "Extract phone numbers":
-                result = ExtractMatches(
-                    input,
-                    @"(?<!\w)(?:\+?\d[\d\s().-]{6,}\d)(?!\w)",
-                    false);
-                break;
+            if (useResult)
+                input = result;
+        }
+    }
+
+    private string ToSentenceCase(string input)
+    {
+        var text = input.ToLowerInvariant().ToCharArray();
+        bool capitalize = true;
+
+        for (int i = 0; i < text.Length; i++)
+        {
+            if (capitalize && char.IsLetter(text[i]))
+            {
+                text[i] = char.ToUpperInvariant(text[i]);
+                capitalize = false;
+            }
+
+            if (text[i] is '.' or '!' or '?')
+                capitalize = true;
         }
 
-        await ShowTextResultAsync(operation, result);
-
-        bool useResult = await ConfirmAsync(
-            "Use processed text?",
-            "Would you like to apply this result to your working text?");
-
-        if (useResult)
-            input = result;
+        return new string(text);
     }
-}
 
-private string ToSentenceCase(string input)
-{
-    var text = input.ToLowerInvariant().ToCharArray();
-    bool capitalize = true;
-
-    for (int i = 0; i < text.Length; i++)
+    private string ExtractMatches(
+        string input,
+        string pattern,
+        bool ignoreCase)
     {
-        if (capitalize && char.IsLetter(text[i]))
+        var options = ignoreCase
+            ? RegexOptions.IgnoreCase
+            : RegexOptions.None;
+
+        var matches = Regex.Matches(input, pattern, options)
+            .Select(match => match.Value.Trim())
+            .Where(value => !string.IsNullOrWhiteSpace(value))
+            .Distinct(StringComparer.OrdinalIgnoreCase);
+
+        string result = string.Join(Environment.NewLine, matches);
+
+        return string.IsNullOrEmpty(result)
+            ? "No matches found."
+            : result;
+    }
+
+    private async Task ShowTextStatisticsAsync(string input)
+    {
+        int words = Regex.Matches(input, @"\b[\p{L}\p{N}_'-]+\b").Count;
+        int characters = input.Length;
+        int charactersWithoutSpaces = input.Count(c => !char.IsWhiteSpace(c));
+        int lines = input.Replace("\r\n", "\n").Split('\n').Length;
+        int sentences = Regex.Matches(input, @"[.!?]+(?=\s|$)").Count;
+
+        string statistics =
+            $"Words: {words}\n\n" +
+            $"Characters: {characters}\n\n" +
+            $"Characters without spaces: {charactersWithoutSpaces}\n\n" +
+            $"Lines: {lines}\n\n" +
+            $"Sentences: {sentences}";
+
+        await ModalAsync(
+            "Text statistics",
+            "A breakdown of your text.",
+            Txt(statistics, 16, true),
+            ("Close", null, true));
+    }
+
+    private async Task ShowTextResultAsync(
+        string operation,
+        string result)
+    {
+        string? choice = await ModalAsync(
+            operation,
+            "Your processed text.",
+            new Editor
+            {
+                Text = result,
+                IsReadOnly = true,
+                AutoSize = EditorAutoSizeOption.Disabled,
+                HeightRequest = 220,
+                BackgroundColor = SurfaceAlt,
+                TextColor = Ink,
+                FontSize = 14
+            },
+            ("Copy result", "copy", true),
+            ("Close", null, false));
+
+        if (choice == "copy")
         {
-            text[i] = char.ToUpperInvariant(text[i]);
-            capitalize = false;
+            await Clipboard.Default.SetTextAsync(result);
+            await MessageAsync(
+                "Copied",
+                "Processed text copied to your clipboard.");
         }
-
-        if (text[i] is '.' or '!' or '?')
-            capitalize = true;
     }
-
-    return new string(text);
-}
-
-private string ExtractMatches(
-    string input,
-    string pattern,
-    bool ignoreCase)
-{
-    var options = ignoreCase
-        ? RegexOptions.IgnoreCase
-        : RegexOptions.None;
-
-    var matches = Regex.Matches(input, pattern, options)
-        .Select(match => match.Value.Trim())
-        .Where(value => !string.IsNullOrWhiteSpace(value))
-        .Distinct(StringComparer.OrdinalIgnoreCase);
-
-    string result = string.Join(Environment.NewLine, matches);
-
-    return string.IsNullOrEmpty(result)
-        ? "No matches found."
-        : result;
-}
-
-private async Task ShowTextStatisticsAsync(string input)
-{
-    int words = Regex.Matches(input, @"\b[\p{L}\p{N}_'-]+\b").Count;
-    int characters = input.Length;
-    int charactersWithoutSpaces = input.Count(c => !char.IsWhiteSpace(c));
-    int lines = input.Replace("\r\n", "\n").Split('\n').Length;
-    int sentences = Regex.Matches(input, @"[.!?]+(?=\s|$)").Count;
-
-    string statistics =
-        $"Words: {words}\n\n" +
-        $"Characters: {characters}\n\n" +
-        $"Characters without spaces: {charactersWithoutSpaces}\n\n" +
-        $"Lines: {lines}\n\n" +
-        $"Sentences: {sentences}";
-
-    await ModalAsync(
-        "Text statistics",
-        "A breakdown of your text.",
-        Txt(statistics, 16, true),
-        ("Close", null, true));
-}
-
-private async Task ShowTextResultAsync(
-    string operation,
-    string result)
-{
-    string? choice = await ModalAsync(
-        operation,
-        "Your processed text.",
-        new Editor
-        {
-            Text = result,
-            IsReadOnly = true,
-            AutoSize = EditorAutoSizeOption.Disabled,
-            HeightRequest = 220,
-            BackgroundColor = SurfaceAlt,
-            TextColor = Ink,
-            FontSize = 14
-        },
-        ("Copy result", "copy", true),
-        ("Close", null, false));
-
-    if (choice == "copy")
-    {
-        await Clipboard.Default.SetTextAsync(result);
-        await MessageAsync(
-            "Copied",
-            "Processed text copied to your clipboard.");
-    }
-}
-
-    // ---------------------------------------------------------
-    // SAVED TEXT AND NOTES
-    // ---------------------------------------------------------
 
     private View BuildSaved()
     {
@@ -1307,10 +1276,6 @@ private async Task ShowTextResultAsync(
         ShowTab("Saved");
     }
 
-    // ---------------------------------------------------------
-    // SETTINGS
-    // ---------------------------------------------------------
-
     private View BuildSettings()
     {
         var page = Page();
@@ -1392,10 +1357,6 @@ private async Task ShowTextResultAsync(
             }));
         }
 
-          
-         
-
-
         page.Children.Add(Card(new VerticalStackLayout
         {
             Spacing = 7,
@@ -1423,14 +1384,6 @@ private async Task ShowTextResultAsync(
         BuildNavigation();
         ShowTab(_currentTab);
     }
-    
-    
-
-
-
-    // ---------------------------------------------------------
-    // SHORTCUTS
-    // ---------------------------------------------------------
 
     private async Task AddActionAsync()
     {
@@ -1526,7 +1479,7 @@ private async Task ShowTextResultAsync(
      private View BuildModalButtons(
     (string Label, string? Value, bool Primary)[] buttons,
     Action<string?> onSelected)
-{
+    {
     var layout = new VerticalStackLayout
     {
         Spacing = 10
@@ -1564,10 +1517,6 @@ private async Task ShowTextResultAsync(
 
     return layout;
 }
-
-    // ---------------------------------------------------------
-    // UTILITIES
-    // ---------------------------------------------------------
 
     private async Task GenerateUuidAsync()
     {
@@ -1640,51 +1589,49 @@ private async Task ShowTextResultAsync(
         }
     }
 
-    
-private async Task OpenCalculatorAsync()
-{
-    string? expression = await PromptAsync(
-        "Calculator",
-        "Use +, -, *, / and parentheses.",
-        "e.g. 12 * (4 + 3)");
-
-    if (string.IsNullOrWhiteSpace(expression))
-        return;
-
-    try
+    private async Task OpenCalculatorAsync()
     {
-        double result = SimpleCalculator.Evaluate(expression);
+        string? expression = await PromptAsync(
+            "Calculator",
+            "Use +, -, *, / and parentheses.",
+            "e.g. 12 * (4 + 3)");
 
-        string value = result.ToString(
-            "G",
-            System.Globalization.CultureInfo.InvariantCulture);
+        if (string.IsNullOrWhiteSpace(expression))
+            return;
 
-        string? choice = await ModalAsync(
-            "Result",
-            expression,
-            Txt(value, 32, true, Accent),
-            ("Copy result", value, true),
-            ("Calculate again", "again", false),
-            ("Close", null, false));
-
-        if (choice == "again")
+        try
         {
-            await OpenCalculatorAsync();
+            double result = SimpleCalculator.Evaluate(expression);
+
+            string value = result.ToString(
+                "G",
+                System.Globalization.CultureInfo.InvariantCulture);
+
+            string? choice = await ModalAsync(
+                "Result",
+                expression,
+                Txt(value, 32, true, Accent),
+                ("Copy result", value, true),
+                ("Calculate again", "again", false),
+                ("Close", null, false));
+
+            if (choice == "again")
+            {
+                await OpenCalculatorAsync();
+            }
+            else if (choice != null)
+            {
+                await Clipboard.Default.SetTextAsync(choice);
+                await MessageAsync("Copied", "Result copied to clipboard.");
+            }
         }
-        else if (choice != null)
+        catch
         {
-            await Clipboard.Default.SetTextAsync(choice);
-            await MessageAsync("Copied", "Result copied to clipboard.");
+            await MessageAsync(
+                "Calculation error",
+                "Enter a valid arithmetic expression, such as 12 * (4 + 3).");
         }
     }
-    catch
-    {
-        await MessageAsync(
-            "Calculation error",
-            "Enter a valid arithmetic expression, such as 12 * (4 + 3).");
-    }
-}
-
 
     private async Task ShowClipboardAsync()
     {
@@ -1742,98 +1689,92 @@ private async Task OpenCalculatorAsync()
         }
     }
 
-    // ---------------------------------------------------------
-    // CUSTOM MODALS
-    // ---------------------------------------------------------
-
-    
-private async Task<string?> PromptAsync(
+    private async Task<string?> PromptAsync(
     string title,
     string subtitle,
     string placeholder,
     string? initialValue = null,
     bool multiline = false)
-{
-    View editor = multiline
-        ? new Editor
+    {
+        View editor = multiline
+            ? new Editor
+            {
+                Text = initialValue ?? "",
+                Placeholder = placeholder,
+                AutoSize = EditorAutoSizeOption.Disabled,
+                HeightRequest = 160,
+                BackgroundColor = SurfaceAlt,
+                TextColor = Ink,
+                PlaceholderColor = Muted,
+                FontSize = 14
+            }
+            : new Entry
+            {
+                Text = initialValue ?? "",
+                Placeholder = placeholder,
+                BackgroundColor = SurfaceAlt,
+                TextColor = Ink,
+                PlaceholderColor = Muted,
+                FontSize = 15
+            };
+
+        var wrapper = new Border
         {
-            Text = initialValue ?? "",
-            Placeholder = placeholder,
-            AutoSize = EditorAutoSizeOption.Disabled,
-            HeightRequest = 160,
             BackgroundColor = SurfaceAlt,
-            TextColor = Ink,
-            PlaceholderColor = Muted,
-            FontSize = 14
-        }
-        : new Entry
-        {
-            Text = initialValue ?? "",
-            Placeholder = placeholder,
-            BackgroundColor = SurfaceAlt,
-            TextColor = Ink,
-            PlaceholderColor = Muted,
-            FontSize = 15
+            StrokeThickness = 0,
+            StrokeShape = new RoundRectangle
+            {
+                CornerRadius = new CornerRadius(18)
+            },
+            Padding = new Thickness(12, 4),
+            Content = editor
         };
 
-    var wrapper = new Border
+        return await ModalAsync(
+            title,
+            subtitle,
+            wrapper,
+            new[]
+            {
+                ("Save", "save", true),
+                ("Cancel", (string?)null, false)
+            },
+            () => editor is Entry entry
+                ? entry.Text
+                : ((Editor)editor).Text);
+    }
+
+    private async Task<string?> ChooseAsync(
+        string title,
+        string subtitle,
+        IEnumerable<string> options)
     {
-        BackgroundColor = SurfaceAlt,
-        StrokeThickness = 0,
-        StrokeShape = new RoundRectangle
+        var availableOptions = options.ToArray();
+
+        var body = new VerticalStackLayout
         {
-            CornerRadius = new CornerRadius(18)
-        },
-        Padding = new Thickness(12, 4),
-        Content = editor
-    };
+            Spacing = 8,
+            Children =
+            {
+                Txt(
+                    "Choose what this shortcut should open.",
+                    13,
+                    color: Muted)
+            }
+        };
 
-    return await ModalAsync(
-        title,
-        subtitle,
-        wrapper,
-        new[]
-        {
-            ("Save", "save", true),
-            ("Cancel", (string?)null, false)
-        },
-        () => editor is Entry entry
-            ? entry.Text
-            : ((Editor)editor).Text);
-}
+        var buttons = availableOptions
+            .Select(option =>
+                (option, (string?)option, true))
+            .Append(("Cancel", (string?)null, false))
+            .ToArray();
 
-    
-private async Task<string?> ChooseAsync(
-    string title,
-    string subtitle,
-    IEnumerable<string> options)
-{
-    var availableOptions = options.ToArray();
-
-    var body = new VerticalStackLayout
-    {
-        Spacing = 8,
-        Children =
-        {
-            Txt(
-                "Choose what this shortcut should open.",
-                13,
-                color: Muted)
-        }
-    };
-
-    var buttons = availableOptions
-        .Select(option =>
-            (option, (string?)option, true))
-        .Append(("Cancel", (string?)null, false))
-        .ToArray();
-
-    return await ModalAsync(
-        title,
-        subtitle,
-        body,
-        buttons);
-}
+        return await ModalAsync(
+            title,
+            subtitle,
+            body,
+            buttons);
+    }
 
     private async Task<bool> ConfirmAsync(string title, string subtitle)
     {
@@ -1866,170 +1807,161 @@ private async Task<string?> ChooseAsync(
             title, subtitle, body, buttons, null);
     }
 
-    
-
-private async Task<string?> ModalAsync(
-    string title,
-    string subtitle,
-    View body,
-    (string Label, string? Value, bool Primary)[] buttons,
-    Func<string?>? getInput)
-{
-    // Prevent multiple modal windows from opening simultaneously.
-    if (_root.Children.Any(v =>
-        v is Grid g && g.AutomationId == "EdgeKitModal"))
+    private async Task<string?> ModalAsync(
+        string title,
+        string subtitle,
+        View body,
+        (string Label, string? Value, bool Primary)[] buttons,
+        Func<string?>? getInput)
     {
-        return null;
-    }
-
-    var completion = new TaskCompletionSource<string?>(
-        TaskCreationOptions.RunContinuationsAsynchronously);
-
-    var scrim = new BoxView
-    {
-        BackgroundColor = Color.FromArgb("#77000000"),
-        Opacity = 0
-    };
-
-    // Modal heading
-    var heading = new VerticalStackLayout
-    {
-        Spacing = 7,
-        Children =
+        if (_root.Children.Any(v =>
+            v is Grid g && g.AutomationId == "EdgeKitModal"))
         {
-            new Border
+            return null;
+        }
+
+        var completion = new TaskCompletionSource<string?>(
+            TaskCreationOptions.RunContinuationsAsynchronously);
+
+        var scrim = new BoxView
+        {
+            BackgroundColor = Color.FromArgb("#77000000"),
+            Opacity = 0
+        };
+
+        var heading = new VerticalStackLayout
+        {
+            Spacing = 7,
+            Children =
             {
-                WidthRequest = 38,
-                HeightRequest = 5,
-                HorizontalOptions = LayoutOptions.Center,
-                BackgroundColor = IsDark
-                    ? Color.FromArgb("#555B68")
-                    : Color.FromArgb("#D3D6E1"),
-                StrokeThickness = 0,
-                StrokeShape = new RoundRectangle
+                new Border
                 {
-                    CornerRadius = new CornerRadius(5)
-                }
-            },
+                    WidthRequest = 38,
+                    HeightRequest = 5,
+                    HorizontalOptions = LayoutOptions.Center,
+                    BackgroundColor = IsDark
+                        ? Color.FromArgb("#555B68")
+                        : Color.FromArgb("#D3D6E1"),
+                    StrokeThickness = 0,
+                    StrokeShape = new RoundRectangle
+                    {
+                        CornerRadius = new CornerRadius(5)
+                    }
+                },
 
-            Txt(title, 23, true),
-            Txt(subtitle, 13, color: Muted)
-        }
-    };
+                Txt(title, 23, true),
+                Txt(subtitle, 13, color: Muted)
+            }
+        };
 
-    // Body and buttons are placed together in ONE scroll view.
-    var modalContent = new VerticalStackLayout
-    {
-        Spacing = 15,
-        Children =
+        var modalContent = new VerticalStackLayout
         {
-            body,
-
-            BuildModalButtons(buttons, value =>
+            Spacing = 15,
+            Children =
             {
-                string? finalValue =
-                    value == "save" && getInput != null
-                        ? getInput()
-                        : value;
+                body,
 
-                completion.TrySetResult(finalValue);
-            })
-        }
-    };
+                BuildModalButtons(buttons, value =>
+                {
+                    string? finalValue =
+                        value == "save" && getInput != null
+                            ? getInput()
+                            : value;
 
-    double screenHeight =
-        DeviceDisplay.MainDisplayInfo.Height /
-        DeviceDisplay.MainDisplayInfo.Density;
+                    completion.TrySetResult(finalValue);
+                })
+            }
+        };
 
-    var contentScroll = new ScrollView
-    {
-        Content = modalContent,
-        Orientation = ScrollOrientation.Vertical,
-        VerticalScrollBarVisibility = ScrollBarVisibility.Default,
-        HorizontalScrollBarVisibility = ScrollBarVisibility.Never,
-        VerticalOptions = LayoutOptions.Start,
-        MaximumHeightRequest = screenHeight * 0.68
-    };
+        double screenHeight =
+            DeviceDisplay.MainDisplayInfo.Height /
+            DeviceDisplay.MainDisplayInfo.Density;
 
-    var sheetContent = new VerticalStackLayout
-    {
-        Spacing = 18,
-        Children =
+        var contentScroll = new ScrollView
         {
-            heading,
-            contentScroll
-        }
-    };
+            Content = modalContent,
+            Orientation = ScrollOrientation.Vertical,
+            VerticalScrollBarVisibility = ScrollBarVisibility.Default,
+            HorizontalScrollBarVisibility = ScrollBarVisibility.Never,
+            VerticalOptions = LayoutOptions.Start,
+            MaximumHeightRequest = screenHeight * 0.68
+        };
 
-    var sheet = new Border
-    {
-        AutomationId = "EdgeKitModalSheet",
-        BackgroundColor = Surface,
-        Stroke = new SolidColorBrush(
-            IsDark
-                ? Color.FromArgb("#414653")
-                : Color.FromArgb("#E0E3ED")),
-        StrokeThickness = 1,
-        StrokeShape = new RoundRectangle
+        var sheetContent = new VerticalStackLayout
         {
-            CornerRadius = new CornerRadius(30)
-        },
-        Padding = new Thickness(21, 17, 21, 20),
-        VerticalOptions = LayoutOptions.End,
-        HorizontalOptions = LayoutOptions.Fill,
-        Margin = new Thickness(10, 0, 10, 12),
-        MaximumHeightRequest = screenHeight * 0.86,
-        TranslationY = 500,
-        Opacity = 0,
-        Content = sheetContent
-    };
+            Spacing = 18,
+            Children =
+            {
+                heading,
+                contentScroll
+            }
+        };
 
-    // Full-screen overlay.
-    var overlay = new Grid
-    {
-        AutomationId = "EdgeKitModal",
-        BackgroundColor = Colors.Transparent
-    };
+        var sheet = new Border
+        {
+            AutomationId = "EdgeKitModalSheet",
+            BackgroundColor = Surface,
+            Stroke = new SolidColorBrush(
+                IsDark
+                    ? Color.FromArgb("#414653")
+                    : Color.FromArgb("#E0E3ED")),
+            StrokeThickness = 1,
+            StrokeShape = new RoundRectangle
+            {
+                CornerRadius = new CornerRadius(30)
+            },
+            Padding = new Thickness(21, 17, 21, 20),
+            VerticalOptions = LayoutOptions.End,
+            HorizontalOptions = LayoutOptions.Fill,
+            Margin = new Thickness(10, 0, 10, 12),
+            MaximumHeightRequest = screenHeight * 0.86,
+            TranslationY = 500,
+            Opacity = 0,
+            Content = sheetContent
+        };
 
-    // IMPORTANT: Add each view exactly once.
-    overlay.Children.Add(scrim);
-    overlay.Children.Add(sheet);
+        var overlay = new Grid
+        {
+            AutomationId = "EdgeKitModal",
+            BackgroundColor = Colors.Transparent
+        };
 
-    // Make the overlay cover BOTH the main content and navigation rows.
-    Grid.SetRowSpan(overlay, 2);
-       // Outside-tap dismissal.
-    var outsideTap = new TapGestureRecognizer();
+        overlay.Children.Add(scrim);
+        overlay.Children.Add(sheet);
 
-    outsideTap.Tapped += (_, _) =>
-        completion.TrySetResult(null);
+        Grid.SetRowSpan(overlay, 2);
+        var outsideTap = new TapGestureRecognizer();
 
-    scrim.GestureRecognizers.Add(outsideTap);
+        outsideTap.Tapped += (_, _) =>
+            completion.TrySetResult(null);
 
-    _root.Add(overlay);
-    overlay.ZIndex = 100;
+        scrim.GestureRecognizers.Add(outsideTap);
 
-    try
-    {
-        await Task.WhenAll(
-            scrim.FadeTo(1, 180, Easing.CubicOut),
-            sheet.FadeTo(1, 200, Easing.CubicOut),
-            sheet.TranslateTo(0, 0, 220, Easing.CubicOut));
+        _root.Add(overlay);
+        overlay.ZIndex = 100;
 
-        string? result = await completion.Task;
+        try
+        {
+            await Task.WhenAll(
+                scrim.FadeTo(1, 180, Easing.CubicOut),
+                sheet.FadeTo(1, 200, Easing.CubicOut),
+                sheet.TranslateTo(0, 0, 220, Easing.CubicOut));
 
-        await Task.WhenAll(
-            scrim.FadeTo(0, 130, Easing.CubicIn),
-            sheet.FadeTo(0, 130, Easing.CubicIn),
-            sheet.TranslateTo(0, 350, 150, Easing.CubicIn));
+            string? result = await completion.Task;
 
-        return result;
+            await Task.WhenAll(
+                scrim.FadeTo(0, 130, Easing.CubicIn),
+                sheet.FadeTo(0, 130, Easing.CubicIn),
+                sheet.TranslateTo(0, 350, 150, Easing.CubicIn));
+
+            return result;
+        }
+        finally
+        {
+            if (_root.Children.Contains(overlay))
+            {
+                _root.Children.Remove(overlay);
+            }
+        }
     }
-    finally
-    {
-        if (_root.Children.Contains(overlay))
-        {
-            _root.Children.Remove(overlay);
-        }
-    }
-}}
-    
+}
